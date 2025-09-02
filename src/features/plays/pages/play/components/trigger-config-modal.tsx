@@ -39,6 +39,7 @@ import {
   useTrackingScriptQuery,
   useTrackingScriptDomainUpdateMutation,
 } from '../../../graphql/operations.generated'
+import { TriggerConfigExcludeLists } from './trigger-config-exclude-lists'
 
 const websiteVisitorSchema = z.object({
   excludedPaths: z.array(z.object({ path: z.string().min(1, 'Path is required') })).optional(),
@@ -341,6 +342,9 @@ export function TriggerConfigModal({
                       </FormItem>
                     )}
                   />
+
+                  {/* Excluded Lists */}
+                  <TriggerConfigExcludeLists trigger={trigger} />
 
                   <DialogFooter>
                     <Button type='button' variant='outline' onClick={onClose} disabled={loading}>
