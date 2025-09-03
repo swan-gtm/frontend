@@ -6,6 +6,7 @@ import { toast } from 'sonner'
 import { MultiAsyncSelect } from '@/components/ui/async-multi-select'
 import { Button } from '@/components/ui/button'
 import { FormControl, FormDescription, FormItem, FormLabel } from '@/components/ui/form'
+import { Separator } from '@/components/ui/separator'
 import { Loadable } from '@/components/loadable'
 import { useTriggerUpdateMutation } from '@/features/plays/graphql/operations.generated'
 
@@ -78,7 +79,7 @@ export function TriggerConfigExcludeLists({ trigger }: TriggerConfigExcludeLists
           Save Lists
         </Button>
       </div>
-      <div className='border-t' />
+      <Separator />
     </Loadable>
   )
 }

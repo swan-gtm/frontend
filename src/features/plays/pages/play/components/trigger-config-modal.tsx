@@ -198,7 +198,7 @@ export function TriggerConfigModal({
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(handleSave)} className='space-y-8'>
                   {/* Excluded Lists */}
-                  <TriggerConfigExcludeLists trigger={trigger} />
+                  {isOpen && <TriggerConfigExcludeLists trigger={trigger} />}
 
                   {/* Excluded Paths */}
                   <FormItem>
