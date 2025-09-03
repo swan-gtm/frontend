@@ -197,6 +197,9 @@ export function TriggerConfigModal({
             <TabsContent value='settings' className='mt-6 space-y-6'>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(handleSave)} className='space-y-8'>
+                  {/* Excluded Lists */}
+                  <TriggerConfigExcludeLists trigger={trigger} />
+
                   {/* Excluded Paths */}
                   <FormItem>
                     <FormLabel>Excluded Paths</FormLabel>
@@ -342,9 +345,6 @@ export function TriggerConfigModal({
                       </FormItem>
                     )}
                   />
-
-                  {/* Excluded Lists */}
-                  <TriggerConfigExcludeLists trigger={trigger} />
 
                   <DialogFooter>
                     <Button type='button' variant='outline' onClick={onClose} disabled={loading}>

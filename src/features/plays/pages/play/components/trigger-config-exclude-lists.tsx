@@ -44,7 +44,7 @@ export function TriggerConfigExcludeLists({ trigger }: TriggerConfigExcludeLists
       variables: { input: { excludeLists: selectedLists, id: trigger.id } },
     })
 
-    toast.success('Excluded lists updated successfully')
+    toast.success('Exclude lists updated successfully')
   }
 
   return (
@@ -58,6 +58,7 @@ export function TriggerConfigExcludeLists({ trigger }: TriggerConfigExcludeLists
             loading={!!crmListsLoading}
             options={allOptions}
             value={selectedLists.map((list) => list.id)}
+            placeholder='Select excluded lists'
             onValueChange={(v) => {
               setSelectedLists(
                 allOptions
@@ -72,9 +73,12 @@ export function TriggerConfigExcludeLists({ trigger }: TriggerConfigExcludeLists
           />
         </FormControl>
       </FormItem>
-      <Button onClick={handleSave} loading={updateTriggerLoading}>
-        Save Lists
-      </Button>
+      <div className='flex justify-end'>
+        <Button onClick={handleSave} loading={updateTriggerLoading}>
+          Save Lists
+        </Button>
+      </div>
+      <div className='border-t' />
     </Loadable>
   )
 }

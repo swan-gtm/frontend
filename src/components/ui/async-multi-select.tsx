@@ -185,11 +185,9 @@ export const MultiAsyncSelect = React.forwardRef<MultiAsyncSelectRef, Props>(
     const isInit = useRef(false)
 
     const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-      // 如果按下的是回车键，则保持弹窗打开
       if (event.key === 'Enter') {
         setIsPopoverOpen(true)
       } else if (event.key === 'Backspace' && !event.currentTarget.value) {
-        // 如果按下的是退格键并且输入框为空，则删除最后一个选中的值
         const newSelectedValues = [...selectedValues]
         newSelectedValues.pop()
         setSelectedValues(newSelectedValues)
@@ -227,7 +225,6 @@ export const MultiAsyncSelect = React.forwardRef<MultiAsyncSelectRef, Props>(
       }
     }
 
-    // 使用 optionsRef 来记录 options 已选项目，同时控制其 size 减少对性能的影响
     useEffect(() => {
       const temp = options.reduce(
         (acc, option) => {
@@ -237,13 +234,11 @@ export const MultiAsyncSelect = React.forwardRef<MultiAsyncSelectRef, Props>(
         {} as Record<string, Option>
       )
       if (async) {
-        // 初始化时，使用 options 来生成 optionsRef
         if (!isInit.current) {
           optionsRef.current = temp
           setReserveOptions(temp)
           isInit.current = true
         } else {
-          // 当 options 变化时，仅保留上一次 selectedValues 中存在的选项
           const temp2 = selectedValues.reduce(
             (acc, value) => {
               const option = optionsRef.current[value]
@@ -404,7 +399,6 @@ export const MultiAsyncSelect = React.forwardRef<MultiAsyncSelectRef, Props>(
                 <CommandEmpty>{`No result found.`}</CommandEmpty>
               )}
               <CommandGroup>
-                {/* 异步模式不需要全选 */}
                 {!async && !hideSelectAll && (
                   <CommandItem key='all' onSelect={toggleAll} className='cursor-pointer'>
                     <div
