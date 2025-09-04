@@ -141,19 +141,20 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
                   className='hover:bg-muted/50 cursor-pointer'
-                  onClick={(e) => {
-                    // Don't trigger when clicking on the actions column or its children
-                    const target = e.target as HTMLElement
-                    const actionsCell = target.closest('[data-column-id="actions"]')
-                    if (!actionsCell) {
-                      const execution = row.original as Execution
-                      setCurrentExecution(execution)
-                      setOpen('view')
-                    }
+                  onClick={() => {
+                    const execution = row.original as Execution
+                    setCurrentExecution(execution)
+                    setOpen('view')
                   }}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} data-column-id={cell.column.id}>
+                    <TableCell
+                      key={cell.id}
+                      data-column-id={cell.column.id}
+                      onClick={
+                        cell.column.id === 'actions' ? (e) => e.stopPropagation() : undefined
+                      }
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
