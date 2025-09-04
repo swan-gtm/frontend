@@ -228,8 +228,8 @@ export default function PlaybookDetailPage() {
                       disabled={isSavingDescription}
                     />
                     <p className='text-muted-foreground text-sm'>
-                      Provide specific guidelines for how AI agents should communicate and engage
-                      with prospects
+                      Provide specific guidelines for how Swan should communicate and engage with
+                      prospects
                     </p>
                   </div>
                 </AccordionContent>

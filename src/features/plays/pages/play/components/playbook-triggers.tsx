@@ -4,8 +4,8 @@ import { Zap, Plus, Users, Eye } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Skeleton } from '@/components/ui/skeleton'
 import { useTriggersQuery } from '../../../graphql/operations.generated'
+import { TriggerCardSkeleton } from './trigger-card-skeleton'
 import { TriggerConfigModal } from './trigger-config-modal'
 
 interface PlaybookTriggersProps {
@@ -88,18 +88,8 @@ export function PlaybookTriggers({ playbookId }: PlaybookTriggersProps) {
         <CardContent>
           {loading ? (
             <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-              {/* Skeleton cards for loading state */}
               {[1, 2].map((index) => (
-                <div key={index} className='rounded-lg border p-4'>
-                  <div className='flex items-start gap-3'>
-                    <Skeleton className='h-9 w-9 rounded-lg' />
-                    <div className='min-w-0 flex-1 space-y-2'>
-                      <Skeleton className='h-5 w-32' />
-                      <Skeleton className='h-4 w-full' />
-                      <Skeleton className='h-4 w-3/4' />
-                    </div>
-                  </div>
-                </div>
+                <TriggerCardSkeleton key={index} />
               ))}
             </div>
           ) : error ? (

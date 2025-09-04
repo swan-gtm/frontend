@@ -50,7 +50,7 @@ export default function PlaybooksPage() {
     return (
       <Page
         title='Plays'
-        description='Intellegent go-to-market routines that help you grow your business'
+        description='Intelligent go-to-market routines that help you grow your business'
       >
         <PlaybooksSkeleton />
       </Page>
@@ -61,7 +61,7 @@ export default function PlaybooksPage() {
     return (
       <Page
         title='Plays'
-        description='Intellegent go-to-market routines that help you grow your business'
+        description='Intelligent go-to-market routines that help you grow your business'
       >
         <EmptyState
           Icon={PlayCircle}
@@ -78,7 +78,7 @@ export default function PlaybooksPage() {
   return (
     <Page
       title='Plays'
-      description='Intellegent go-to-market routines that help you grow your business'
+      description='Intelligent go-to-market routines that help you grow your business'
       // actions={
       //   <Button onClick={() => navigate({ to: '/plays/new' })}>
       //     <Plus className='mr-2 h-4 w-4' />

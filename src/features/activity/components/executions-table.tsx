@@ -153,11 +153,7 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
                   }}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      data-column-id={cell.column.id}
-                      className={cell.column.id === 'result' ? 'whitespace-normal' : undefined}
-                    >
+                    <TableCell key={cell.id} data-column-id={cell.column.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
