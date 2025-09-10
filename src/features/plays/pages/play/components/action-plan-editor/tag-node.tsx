@@ -113,6 +113,12 @@ export const TagNode = Node.create({
     return ['span', mergeAttributes({ 'data-type': 'tag' }, HTMLAttributes)]
   },
 
+  renderText({ node }) {
+    const { type, value, subtype, label } = node.attrs
+    const variableType = subtype || type
+    return `\${${variableType}:${value}:${label}}$`
+  },
+
   addNodeView() {
     return ReactNodeViewRenderer(TagComponent)
   },

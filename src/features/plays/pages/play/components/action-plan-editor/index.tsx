@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import { parseContent } from './helpers'
 import './styles.css'
 import { ChannelExtensionWithData, UserExtensionWithData } from './tag-extensions'
 import { TagNode } from './tag-node'
@@ -20,10 +21,11 @@ export function ActionPlanEditor({
 }: ActionPlanEditorProps) {
   const editor = useEditor({
     extensions: [StarterKit, TagNode, ChannelExtensionWithData, UserExtensionWithData],
-    content: value,
+    content: parseContent(value),
     editable: !disabled,
     onUpdate: ({ editor }) => {
-      onChange?.(editor.getHTML())
+      // Use double newline to separate paragraphs for proper preservation
+      onChange?.(editor.getText({ blockSeparator: '\n\n' }))
     },
     editorProps: {
       attributes: {
@@ -34,8 +36,11 @@ export function ActionPlanEditor({
 
   // Update editor content when value prop changes
   useEffect(() => {
-    if (editor && value !== undefined && value !== editor.getHTML()) {
-      editor.commands.setContent(value)
+    if (editor && value !== undefined) {
+      const currentText = editor.getText({ blockSeparator: '\n\n' })
+      if (value !== currentText) {
+        editor.commands.setContent(parseContent(value))
+      }
     }
   }, [value, editor])
 
