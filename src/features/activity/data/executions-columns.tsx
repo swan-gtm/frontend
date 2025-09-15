@@ -51,7 +51,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
               }}
             />
           )}
-          <span className='truncate text-sm'>{identity.name}</span>
+          <span className='truncate text-sm' title={identity.name}>{identity.name}</span>
         </>
       )
 
@@ -62,7 +62,8 @@ export const executionsColumns: ColumnDef<Execution>[] = [
               href={formatUrl(identity.url)}
               target='_blank'
               rel='noopener noreferrer'
-              className='flex items-center gap-2 hover:underline'
+              className='flex min-w-0 items-center gap-2 hover:underline'
+              title={identity.name}
             >
               {content}
             </a>
@@ -90,7 +91,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
 
       return (
         <div className='w-[160px]'>
-          <span className='truncate'>{playbookName || playbookId}</span>
+          <span className='block truncate' title={playbookName || playbookId}>{playbookName || playbookId}</span>
         </div>
       )
     },
@@ -115,9 +116,10 @@ export const executionsColumns: ColumnDef<Execution>[] = [
         <div className='w-[160px]'>
           <span
             className={cn(
-              'text-wrap break-words',
+              'block truncate',
               scenarioName ? '' : 'text-muted-foreground italic'
             )}
+            title={scenarioName || 'Deleted Scenario'}
           >
             {scenarioName || 'Deleted Scenario'}
           </span>
