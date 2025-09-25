@@ -242,7 +242,7 @@ export default function PlaybookDetailPage() {
 
                           <div>
                             <span className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
-                              When
+                              WHEN
                             </span>
                             <p className='text-muted-foreground mt-1 line-clamp-3 text-sm'>
                               {scenario.description || 'No condition defined'}

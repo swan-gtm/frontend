@@ -5,6 +5,7 @@ import { Activity as ActivityIcon, Cable, PlayCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import EmptyState from '@/components/empty-state'
+import { Loadable } from '@/components/loadable'
 import { Page } from '@/components/page'
 import { ExecutionsDialogs } from './components/executions-dialogs'
 import { ExecutionsProvider } from './components/executions-provider'
@@ -86,30 +87,35 @@ function ActivityContent() {
     <>
       <Page title='Activity' description='View and manage agent activity'>
         <div className='space-y-4'>
-          {!currentData && executionsLoading ? (
-            <div className='space-y-3'>
-              <Skeleton className='h-8 w-full' />
-              <Skeleton className='h-[400px] w-full' />
-            </div>
-          ) : !hasAnyActivity ? (
-            <EmptyState
-              Icon={ActivityIcon}
-              title='No activity yet'
-              description='Get started by connecting your tools and setting up your first play to see agent activity here'
-              Cta={
-                <div className='flex gap-3'>
-                  <Button variant='outline' onClick={() => navigate({ to: '/tools' })}>
-                    <Cable className='mr-2 h-4 w-4' />
-                    Connect Tools
-                  </Button>
-                  <Button onClick={() => navigate({ to: '/plays' })}>
-                    <PlayCircle className='mr-2 h-4 w-4' />
-                    Set Up Your First Play
-                  </Button>
-                </div>
-              }
-            />
-          ) : (
+          <Loadable
+            isLoading={!currentData && executionsLoading}
+            loader={
+              <div className='space-y-3'>
+                <Skeleton className='h-8 w-full' />
+                <Skeleton className='h-[400px] w-full' />
+              </div>
+            }
+            isEmpty={!hasAnyActivity}
+            emptyComponent={
+              <EmptyState
+                Icon={ActivityIcon}
+                title='No activity yet'
+                description='Get started by connecting your tools and setting up your first play to see agent activity here'
+                Cta={
+                  <div className='flex gap-3'>
+                    <Button variant='outline' onClick={() => navigate({ to: '/tools' })}>
+                      <Cable className='mr-2 h-4 w-4' />
+                      Connect Tools
+                    </Button>
+                    <Button onClick={() => navigate({ to: '/plays' })}>
+                      <PlayCircle className='mr-2 h-4 w-4' />
+                      Set Up Your First Play
+                    </Button>
+                  </div>
+                }
+              />
+            }
+          >
             <ExecutionsTable
               data={executions}
               playbooks={playbooks}
@@ -117,7 +123,7 @@ function ActivityContent() {
               totalCount={totalCount}
               isLoading={executionsLoading}
             />
-          )}
+          </Loadable>
         </div>
       </Page>
 
